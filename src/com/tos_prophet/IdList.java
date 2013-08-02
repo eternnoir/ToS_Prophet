@@ -17,5 +17,8 @@ public class IdList {
 		return idlist;
 	}
 	
+	static public String findNameById(int i){
+		return idlist.get(i);
+	}
 	
 }

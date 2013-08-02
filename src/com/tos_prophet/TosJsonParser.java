@@ -13,7 +13,7 @@ public class TosJsonParser {
 
 	}
 
-	public ArrayList<levleData> getItemList(String str) {
+	public ArrayList<levleData> getLevelData(String str) {
 		str = checkFormat(str);
 		ArrayList<levleData> ret = new ArrayList<levleData>();
 		try {
@@ -21,10 +21,18 @@ public class TosJsonParser {
 			Log.i("JsonParser",
 					"Number of entries " + jsonArray.length());
 			for (int i = 0; i < jsonArray.length(); i++) {
+				levleData ld = new levleData(i+1);
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
 				JSONArray emeArray = jsonObject.getJSONArray("enemies");
-				
-				
+				for(int j =0;j<emeArray.length();j++){
+					JSONObject emeOb = emeArray.getJSONObject(j);
+					int mid = emeOb.getInt("monsterId");
+					String name = IdList.findNameById(mid);
+					String loot = emeOb.getString("lootItem");
+					enemiesData ed = new enemiesData(mid, name, loot);
+					ld.addEnemies(ed);
+				}
+				ret.add(ld);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

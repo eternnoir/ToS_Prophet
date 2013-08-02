@@ -6,13 +6,38 @@ import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class ServiceCenter {
 	final String _filePath = "/data/data/com.madhead.tos.zh/shared_prefs/com.madhead.tos.zh.xml";
+	private final String xmlid = "MH_CACHE_RUNTIME_DATA_CURRENT_FLOOR_WAVES";
 	String _xmlContent;
 
 	public ServiceCenter() {
 		_xmlContent = "";
+	}
+
+	public ArrayList<String> getDisplayStringData() {
+		checkoutRoot();
+		XmlParser xmp = new XmlParser();
+		TosJsonParser tjp = new TosJsonParser();
+		String xmlres = xmp.parserXmlByID("/mnt/sdcard/tmp/TOS_tmp.xml", xmlid);
+		if (xmlres.equals("")) {
+			return null;
+		}
+		ArrayList<levleData> ld = tjp.getLevelData(xmlres);
+		ArrayList<String> ret = new ArrayList<String>();
+		for (int i = 0; i < ld.size(); i++) {
+			ret.add("level " + (i + 1));
+			ArrayList<enemiesData> el = ld.get(i).getEnemiesList();
+			for (enemiesData ed : el) {
+				if(!ed.getLootItem().equals("null")){
+					ret.add("Drop "+ed.getName());
+				}
+			}
+		}
+		return ret;
+
 	}
 
 	private String getXmlFile(String _path) {
