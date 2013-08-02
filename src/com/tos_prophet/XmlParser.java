@@ -48,6 +48,7 @@ public class XmlParser {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return "Can't Find File";
 		}
 		return ret;
 	}
