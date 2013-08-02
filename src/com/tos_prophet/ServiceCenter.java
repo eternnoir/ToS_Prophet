@@ -52,9 +52,9 @@ public class ServiceCenter {
 			String mkdircmd = "mkdir /mnt/sdcard/tmp\n";
 			os.writeBytes(mkdircmd);
 			
-			String cmd = "cat " + _filePath + ">> /mnt/sdcard/tmp/TOS_tmp.xml\n";
+			String cmd = "cp " + _filePath + " /mnt/sdcard/tmp/TOS_tmp.xml\n";
 			os.writeBytes(cmd);
-			cmd = "cat " + _MyCardFp + ">> /mnt/sdcard/tmp/TOS_tmp.xml\n";
+			cmd = "cp " + _MyCardFp + " /mnt/sdcard/tmp/TOS_tmp.xml\n";
 			os.writeBytes(cmd);
 
 			// Close the terminal
