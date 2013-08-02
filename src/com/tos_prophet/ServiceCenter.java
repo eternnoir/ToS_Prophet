@@ -33,7 +33,7 @@ public class ServiceCenter {
 			ArrayList<enemiesData> el = ld.get(i).getEnemiesList();
 			for (enemiesData ed : el) {
 				if(!ed.getLootItem().equals("null")){
-					ret.add("Drop "+ed.getName());
+					ret.add(ed.getName()+" Drop: "+ed.getLootItem());
 				}
 			}
 		}
@@ -75,6 +75,9 @@ public class ServiceCenter {
 
 			// Attempt to write a file to a root-only
 			DataOutputStream os = new DataOutputStream(p.getOutputStream());
+			String mkdircmd = "mkdir /mnt/sdcard/tmp\n";
+			os.writeBytes(mkdircmd);
+			
 			String cmd = "cp " + _filePath + " /mnt/sdcard/tmp/TOS_tmp.xml\n";
 			os.writeBytes(cmd);
 			

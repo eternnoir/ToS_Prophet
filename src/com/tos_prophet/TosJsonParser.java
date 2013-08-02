@@ -28,7 +28,19 @@ public class TosJsonParser {
 					JSONObject emeOb = emeArray.getJSONObject(j);
 					int mid = emeOb.getInt("monsterId");
 					String name = IdList.findNameById(mid);
-					String loot = emeOb.getString("lootItem");
+					String tloot = emeOb.getString("lootItem");
+					String loot = "null";
+					if(tloot.equals("null")){
+						loot = "null";
+					}else{
+						JSONObject lootob = emeOb.getJSONObject("lootItem");
+						if(lootob.getString("type").equals("money")){
+							loot = "Money +" + lootob.getString("amount");
+						}
+						else if(lootob.getString("type").equals("monster")){
+							loot = "Card";
+						}
+					}
 					enemiesData ed = new enemiesData(mid, name, loot);
 					ld.addEnemies(ed);
 				}
