@@ -18,7 +18,7 @@ public class IdList {
 	}
 	
 	static public String findNameById(int i){
-		return idlist.get(i);
+		return idlist.get(i-1);
 	}
 	
 }
