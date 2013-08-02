@@ -41,32 +41,6 @@ public class ServiceCenter {
 
 	}
 
-	private String getXmlFile(String _path) {
-		String ret = "";
-
-		try {
-			// Open the file that is the first
-			// command line parameter
-			FileInputStream fstream = new FileInputStream(_path);
-			// Get the object of DataInputStream
-			DataInputStream in = new DataInputStream(fstream);
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			String strLine;
-			// Read File Line By Line
-			while ((strLine = br.readLine()) != null) {
-				// Print the content on the console
-				ret = ret + strLine;
-				System.out.println(strLine);
-			}
-			// Close the input stream
-			in.close();
-
-		} catch (Exception e) {// Catch exception if any
-			System.err.println("Error: " + e.getMessage());
-		}
-		return ret;
-	}
-
 	private void checkoutRoot() {
 		Process p;
 		try {
