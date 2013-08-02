@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class ServiceCenter {
 	final String _filePath = "/data/data/com.madhead.tos.zh/shared_prefs/com.madhead.tos.zh.xml";
+	final String _MyCardFp = "/data/data/com.madhead.tos.zh.ex/shared_prefs/com.madhead.tos.zh.ex.xml";
 	private final String xmlid = "MH_CACHE_RUNTIME_DATA_CURRENT_FLOOR_WAVES";
 	String _xmlContent;
 
@@ -75,6 +76,9 @@ public class ServiceCenter {
 			// Attempt to write a file to a root-only
 			DataOutputStream os = new DataOutputStream(p.getOutputStream());
 			String cmd = "cp " + _filePath + " /mnt/sdcard/tmp/TOS_tmp.xml\n";
+			os.writeBytes(cmd);
+			
+			cmd = "cp " + _MyCardFp + " /mnt/sdcard/tmp/TOS_tmp.xml\n";
 			os.writeBytes(cmd);
 
 			// Close the terminal
