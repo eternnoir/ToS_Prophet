@@ -73,6 +73,9 @@ public class ItemAdapter extends BaseExpandableListAdapter {
 		}
 		TextView tv = (TextView) convertView.findViewById(R.id.monster_Text);
 		tv.setText(enemies.getName());
+		TextView tvl = (TextView) convertView.findViewById(R.id.loot_Text);
+		tvl.setText(enemies.getLootItem());
+		
 		ImageView iv = (ImageView) convertView.findViewById(R.id.imageView);
 		
 		InputStream in = FileLoader.getFileByAsset("monster_card_pic/"+enemies.getIconPath());

@@ -15,7 +15,12 @@ public class levleData {
 	}
 	
 	public void addEnemies(enemiesData em){
-		_emeList.add(em);
+		if(em.getLootItem().equals("null")){
+			//if it didnt drop anything ,dont add.
+		}
+		else{
+			_emeList.add(em);
+		}
 	}
 	public ArrayList<enemiesData> getEnemiesList(){
 		return _emeList;

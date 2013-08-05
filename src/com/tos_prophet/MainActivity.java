@@ -102,6 +102,7 @@ public class MainActivity extends Activity{
 			*/
 			// Set this blank adapter to the list view
 			listView.setAdapter(adapter);
+			this.autoExpendViewList();
 			
 		}
 
@@ -154,6 +155,13 @@ public class MainActivity extends Activity{
 		} else {
 			return "";
 		}
+	}
+	
+	private void autoExpendViewList(){
+		ExpandableListView listView = (ExpandableListView) findViewById(R.id.monstersListView);
+		int count = adapter.getGroupCount();
+		for (int position = 1; position <= count; position++)
+			listView.expandGroup(position - 1);
 	}
 
 
