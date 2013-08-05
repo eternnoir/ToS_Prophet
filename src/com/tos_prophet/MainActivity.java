@@ -16,6 +16,8 @@ import java.io.Writer;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -23,14 +25,19 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity{
 	private final String xmlid = "MH_CACHE_RUNTIME_DATA_CURRENT_FLOOR_WAVES";
 	private Resources resources;
 	private String idFlieStr;
+	private ItemAdapter adapter;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,20 +64,46 @@ public class MainActivity extends Activity {
 	private void setUpInfo() {
 		ServiceCenter _sc = new ServiceCenter();
 		IdList.addList(loadIdFile());
-		ArrayList<String> result = _sc.getDisplayStringData();
-		if (result == null) {
+		ArrayList<levleData> result_level = _sc.getLevelData();
+		if (result_level == null) {
 			Builder MyAlertDialog = new AlertDialog.Builder(this);
 			MyAlertDialog.setTitle("Error");
 			MyAlertDialog.setMessage("Are You Root?");
 			MyAlertDialog.show();
 		} else {
-			LinearLayout linearLayout = (LinearLayout) findViewById(R.id.itemLayout);
-			for (String str : result) {
-				TextView valueTV = new TextView(this);
-				valueTV.setText(str);
-				linearLayout.addView(valueTV);
+			// Retrive the ExpandableListView from the layout
+			ExpandableListView listView = (ExpandableListView) findViewById(R.id.monstersListView);
+			ArrayList<levleData> ldList = _sc.getLevelData();
+			
+			ArrayList<String> groups = new ArrayList<String>();
+			ArrayList<ArrayList<enemiesData>> children = new ArrayList<ArrayList<enemiesData>>();
+			for(levleData ld : ldList){
+				groups.add("Level "+ld.getLevel()+"");
+				ArrayList<enemiesData> emList = ld.getEnemiesList();
+				children.add(emList);
 			}
+			adapter = new ItemAdapter(this, groups,
+					children);
+
+
+
+			// Initialize the adapter with blank groups and children
+			// We will be adding children on a thread, and then update the
+			// ListView
+			/*
+			adapter = new ItemAdapter(this, new ArrayList<String>(),
+					new ArrayList<ArrayList<enemiesData>>());
+			for(levleData ld : ldList){
+				for(enemiesData ed : ld.getEnemiesList()){
+					adapter.addItem(ed);
+				}
+			}
+			*/
+			// Set this blank adapter to the list view
+			listView.setAdapter(adapter);
+			
 		}
+
 	}
 
 	public String loadIdFile() {
@@ -121,5 +154,6 @@ public class MainActivity extends Activity {
 			return "";
 		}
 	}
+
 
 }

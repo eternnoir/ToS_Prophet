@@ -41,7 +41,7 @@ public class TosJsonParser {
 							loot = "Card";
 						}
 					}
-					enemiesData ed = new enemiesData(mid, name, loot);
+					enemiesData ed = new enemiesData(mid, i,name, loot);
 					ld.addEnemies(ed);
 				}
 				ret.add(ld);

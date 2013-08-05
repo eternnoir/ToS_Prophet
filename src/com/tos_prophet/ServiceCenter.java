@@ -40,6 +40,18 @@ public class ServiceCenter {
 		return ret;
 
 	}
+	
+	public ArrayList<levleData> getLevelData(){
+		checkoutRoot();
+		XmlParser xmp = new XmlParser();
+		TosJsonParser tjp = new TosJsonParser();
+		String xmlres = xmp.parserXmlByID("/mnt/sdcard/tmp/TOS_tmp.xml", xmlid);
+		if (xmlres.equals("")) {
+			return null;
+		}
+		ArrayList<levleData> ld = tjp.getLevelData(xmlres);
+		return ld;
+	}
 
 	private void checkoutRoot() {
 		Process p;

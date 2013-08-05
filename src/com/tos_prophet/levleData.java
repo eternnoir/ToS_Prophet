@@ -10,6 +10,10 @@ public class levleData {
 		_emeList = new ArrayList<enemiesData>();
 	}
 	
+	public int getLevel(){
+		return _level;
+	}
+	
 	public void addEnemies(enemiesData em){
 		_emeList.add(em);
 	}
