@@ -42,6 +42,7 @@ public class MainActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(null);
+		setTheme(android.R.style.Theme_Black);
 		setContentView(R.layout.activity_main);
 		setUpInfo();
 	}
@@ -50,6 +51,7 @@ public class MainActivity extends Activity{
 	public void onStart() {
 		super.onStart();
 		super.onCreate(null);
+		setTheme(android.R.style.Theme_Black);
 		setContentView(R.layout.activity_main);
 		setUpInfo();
 	}

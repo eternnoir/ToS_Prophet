@@ -12,9 +12,8 @@ public class enemiesData {
 		_name = name;
 		_lootItem = lootItrm;
 		_level = level;
-		_iconPath = id+"i.png";
-	}
-	
+		_iconPath = String.format("%03d", id) +"i.png"; //001 002 003
+	}	
 	public int getId(){
 		return _id;
 	}
