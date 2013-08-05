@@ -62,6 +62,7 @@ public class MainActivity extends Activity{
 	}
 
 	private void setUpInfo() {
+		FileLoader.setContext(this);
 		ServiceCenter _sc = new ServiceCenter();
 		IdList.addList(loadIdFile());
 		ArrayList<levleData> result_level = _sc.getLevelData();
