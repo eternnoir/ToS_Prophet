@@ -22,7 +22,7 @@ public class ServiceCenter {
 		checkoutRoot();
 		XmlParser xmp = new XmlParser();
 		TosJsonParser tjp = new TosJsonParser();
-		String xmlres = xmp.parserXmlByID("/mnt/sdcard/tmp/TOS_tmp.xml", xmlid);
+		String xmlres = xmp.parserXmlByID(ConfigData.CacheDir+"/TOS_tmp.xml", xmlid);
 		if (xmlres.equals("")) {
 			return null;
 		}
@@ -45,7 +45,7 @@ public class ServiceCenter {
 		checkoutRoot();
 		XmlParser xmp = new XmlParser();
 		TosJsonParser tjp = new TosJsonParser();
-		String xmlres = xmp.parserXmlByID("/mnt/sdcard/tmp/TOS_tmp.xml", xmlid);
+		String xmlres = xmp.parserXmlByID(ConfigData.CacheDir+"/TOS_tmp.xml", xmlid);
 		if (xmlres.equals("")) {
 			return null;
 		}
@@ -61,14 +61,13 @@ public class ServiceCenter {
 
 			// Attempt to write a file to a root-only
 			DataOutputStream os = new DataOutputStream(p.getOutputStream());
-			String mkdircmd = "mkdir /mnt/sdcard/tmp\n";
-			os.writeBytes(mkdircmd);
 			
-			String cmd = "cp " + _filePath + " /mnt/sdcard/tmp/TOS_tmp.xml\n";
+			String cmd = "cp " + _filePath + " "+ConfigData.CacheDir+"/TOS_tmp.xml\n";
 			os.writeBytes(cmd);
-			cmd = "cp " + _MyCardFp + " /mnt/sdcard/tmp/TOS_tmp.xml\n";
+			cmd = "cp " + _MyCardFp + " "+ConfigData.CacheDir+"/TOS_tmp.xml\n";
 			os.writeBytes(cmd);
-
+			cmd = "chmod 777 "+ConfigData.CacheDir+"/TOS_tmp.xml\n";
+			os.writeBytes(cmd);
 			// Close the terminal
 			os.writeBytes("exit\n");
 			os.flush();

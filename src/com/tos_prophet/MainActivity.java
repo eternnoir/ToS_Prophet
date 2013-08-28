@@ -67,6 +67,7 @@ public class MainActivity extends Activity{
 		FileLoader.setContext(this);
 		ServiceCenter _sc = new ServiceCenter();
 		IdList.addList(loadIdFile());
+		ConfigData.CacheDir = getCacheDir().toString();
 		ArrayList<levleData> result_level = _sc.getLevelData();
 		if (result_level == null) {
 			Builder MyAlertDialog = new AlertDialog.Builder(this);
