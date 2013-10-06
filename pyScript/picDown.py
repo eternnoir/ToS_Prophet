@@ -7,7 +7,7 @@ image type http://tos.hehagame.com/tj/images/60px/60px-402i.png
 pic_number='001.png'
 path_name = './'
   
-for r in range(1, 402):
+for r in range(1, 500):
    file_name = pic_number[:-7] + '{:03}'.format(int(pic_number[-7:-4]) - 1 + r)+"i" + pic_number[-4:]
    print(base_url + file_name)
    try:
